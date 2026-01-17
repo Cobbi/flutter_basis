@@ -23,6 +23,48 @@ class _TodoState extends State<Todo> {
     });
   }
 
+  void createNewTodo() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        String newTodoTitle = '';
+
+        return AlertDialog(
+          title: const Text('Add New Todo'),
+          content: TextField(
+            onChanged: (value) {
+              newTodoTitle = value;
+            },
+            decoration: const InputDecoration(
+                hintText: 'Enter todo title', border: OutlineInputBorder()),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  todoList.add([newTodoTitle, false]);
+                });
+                Navigator.of(context).pop();
+              },
+              // style: TextButton.styleFrom(
+              //     backgroundColor: Colors.yellow,
+              //     foregroundColor: Colors.black,
+              //     padding:
+              //         const EdgeInsets.symmetric(horizontal: 12, vertical: 2)),
+              child: const Text('Add'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +73,11 @@ class _TodoState extends State<Todo> {
         backgroundColor: Colors.yellow,
         title: const Text("TODO"),
         elevation: 0,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: createNewTodo,
+        backgroundColor: Colors.yellow,
+        child: const Icon(Icons.add),
       ),
       body: ListView.builder(
         itemCount: todoList.length,
