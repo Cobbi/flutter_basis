@@ -55,6 +55,16 @@ class _CalculatorState extends State<Calculator> {
           break;
         case '/':
           result = num1! / num2!;
+          if (num1 == 0) {
+            setState(() {
+              displayText = "Error: Division by zero";
+              num1 = null;
+              num2 = null;
+              operation = "";
+            });
+            return;
+          }
+          result = num1! / num2!;
           break;
       }
 
