@@ -8,7 +8,12 @@ import 'package:learnflutter/pages/todo.dart';
 // import 'package:learnflutter/pages/simple_calculator.dart';
 // import 'package:learnflutter/pages/todo_page.dart';
 
-void main() {
+// void main() {
+//   runApp(const MyApp());
+// }
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

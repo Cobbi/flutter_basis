@@ -11,7 +11,6 @@ class Todo extends StatefulWidget {
 class _TodoState extends State<Todo> {
   List todoList = [
     ["Buy groceries", false],
-    ["Walk the dog", false],
     ["Read a book", false],
     ["Exercise", false],
     ["Call a friend", false],
@@ -65,6 +64,12 @@ class _TodoState extends State<Todo> {
     );
   }
 
+  void deleteTodo(int index) {
+    setState(() {
+      todoList.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +91,7 @@ class _TodoState extends State<Todo> {
             title: todoList[index][0],
             taskCompleted: todoList[index][1],
             onChanged: (value) => checkBoxChnged(value, index),
+            onDelete: () => deleteTodo(index),
           );
         },
       ),
